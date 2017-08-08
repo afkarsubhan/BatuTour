@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/service"
+            android:icon="@drawable/ic_domain_black_24dp"
+            android:title="@string/service" />
+        <item
+            android:id="@+id/booking"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="@string/booking" />
+        <item
+            android:id="@+id/message"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="@string/message" />
+        <item
+            android:id="@+id/account"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/account" />
+    </group>
+
+</menu>
