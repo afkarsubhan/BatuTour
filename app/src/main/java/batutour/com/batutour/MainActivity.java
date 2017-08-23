@@ -23,16 +23,14 @@ import java.util.List;
 import batutour.com.batutour.activity.Booking;
 import batutour.com.batutour.activity.Message;
 import batutour.com.batutour.activity.Notlogin;
-import batutour.com.batutour.fragment.CityTour;
-import batutour.com.batutour.fragment.CustomTour;
-import batutour.com.batutour.fragment.Penginapan;
-import batutour.com.batutour.fragment.RentCar;
-import batutour.com.batutour.fragment.RentMotor;
+import batutour.com.batutour.fragment.Account;
+import batutour.com.batutour.fragment.Home;
+import batutour.com.batutour.fragment.Inbox;
+import batutour.com.batutour.fragment.ListBooking;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -55,23 +53,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        header = navigationView.getHeaderView(0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void setupTabIcons() {
@@ -79,16 +66,14 @@ public class MainActivity extends AppCompatActivity
        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-       tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CityTour(), "CITY TOUR");
-        adapter.addFragment(new RentCar(), "RENT CAR");
-        adapter.addFragment(new RentMotor(), "RENT MOTOR");
-        adapter.addFragment(new Penginapan(), "PENGINAPAN");
-        adapter.addFragment(new CustomTour(), "CUSTOM TOUR");
+        adapter.addFragment(new Home(), "HOME");
+        adapter.addFragment(new ListBooking(), "List Booking");
+        adapter.addFragment(new Inbox(), "Inbox");
+        adapter.addFragment(new Account(), "Account");
         viewPager.setAdapter(adapter);
     }
 
@@ -127,12 +112,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        onBackPressed();
     }
 
     @Override
@@ -157,26 +137,4 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.service) {
-
-        } else if (id == R.id.booking) {
-            startActivity(new Intent(MainActivity.this, Booking.class));
-
-        } else if (id == R.id.message) {
-            startActivity(new Intent(MainActivity.this, Message.class));
-
-        } else if (id == R.id.account) {
-            startActivity(new Intent(MainActivity.this, Notlogin.class));
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

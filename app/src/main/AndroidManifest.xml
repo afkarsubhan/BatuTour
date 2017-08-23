@@ -18,12 +18,13 @@
         </activity>
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Notlogin" />
-        <activity android:name=".activity.Booking"
-            android:label="Booking">
-        </activity>
-        <activity android:name=".activity.Message"
-            android:label="Message">
-        </activity>
+        <activity
+            android:name=".activity.Booking"
+            android:label="Booking"></activity>
+        <activity
+            android:name=".activity.Message"
+            android:label="Message"></activity>
+        <activity android:name=".activity.Splashscreen"></activity>
     </application>
 
 </manifest>
