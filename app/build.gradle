@@ -51,4 +51,5 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.androidanimations:library:1.0.3@aar'
+    compile 'me.relex:circleindicator:1.2.2@aar'
 }

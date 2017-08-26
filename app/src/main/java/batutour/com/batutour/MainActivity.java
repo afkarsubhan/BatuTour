@@ -23,12 +23,21 @@ import java.util.List;
 import batutour.com.batutour.activity.Booking;
 import batutour.com.batutour.activity.Message;
 import batutour.com.batutour.activity.Notlogin;
+import batutour.com.batutour.adapter.MyAdapter;
 import batutour.com.batutour.fragment.Account;
 import batutour.com.batutour.fragment.Home;
 import batutour.com.batutour.fragment.Inbox;
 import batutour.com.batutour.fragment.ListBooking;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import android.os.Bundle;
+import android.os.Handler;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_menu_manage
     };
 
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static final Integer[] XMEN= {R.drawable.city1,R.drawable.city2,R.drawable.city3};
+    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +72,38 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
+        init();
     }
+
+
+    private void init() {
+        for(int i=0;i<XMEN.length;i++)
+            XMENArray.add(XMEN[i]);
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new MyAdapter(MainActivity.this,XMENArray));
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == XMEN.length) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);
+    }
+
 
     private void setupTabIcons() {
        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
