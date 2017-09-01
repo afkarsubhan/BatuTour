@@ -45,8 +45,8 @@ public class Home extends Fragment {
 //        mPager.setAdapter(new MyAdapter(getActivity(), XMENArray));
 //        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
 //        indicator.setViewPager(mPager);
-//
-//        init();
+
+    //    init();
         return view;
     }
 

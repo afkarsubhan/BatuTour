@@ -1,12 +1,16 @@
 package batutour.com.batutour;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +27,9 @@ import java.util.List;
 import batutour.com.batutour.activity.Booking;
 import batutour.com.batutour.activity.Message;
 import batutour.com.batutour.activity.Notlogin;
+import batutour.com.batutour.adapter.Data;
 import batutour.com.batutour.adapter.MyAdapter;
+import batutour.com.batutour.adapter.RecyclerAdapter;
 import batutour.com.batutour.fragment.Account;
 import batutour.com.batutour.fragment.Home;
 import batutour.com.batutour.fragment.Inbox;
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
-    @BindView(R.id.viewpager)
+    @BindView(R.id.viewpagertab)
     ViewPager viewPager;
     NavigationView navigationView;
     View header;
@@ -62,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
     private static final Integer[] XMEN= {R.drawable.city1,R.drawable.city2,R.drawable.city3};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
+    private List<Data> datasList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private RecyclerAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +83,30 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
         init();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+//        mAdapter = new RecyclerAdapter(datasList);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
+
+        prepareData();
+    }
+
+    private void prepareData() {
+        Data movie = new Data(BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.btnlogin), "New York", "2015");
+        datasList.add(movie);
+
+        movie = new Data(BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.btnregister), "Animation, Kids & Family", "2015");
+        datasList.add(movie);
+
+        movie = new Data(BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.common_full_open_on_phone), "Action", "2015");
+        datasList.add(movie);
     }
 
 

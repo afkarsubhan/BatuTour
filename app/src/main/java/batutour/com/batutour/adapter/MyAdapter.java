@@ -34,6 +34,7 @@ public class MyAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
+
     @Override
     public int getCount() {
         return images.size();
